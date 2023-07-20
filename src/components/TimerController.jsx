@@ -1,8 +1,13 @@
 import Button from "./Button";
-import plusIcon from '../assets/icons/plus.svg'
-import minusIcon from '../assets/icons/minus.svg'
+import plusIcon from "../assets/icons/plus.svg";
+import minusIcon from "../assets/icons/minus.svg";
 
-const TimerController = ({ sessionLength, breakLength, dispatch, isRunning }) => {
+const TimerController = ({
+  sessionLength,
+  breakLength,
+  dispatch,
+  isRunning,
+}) => {
   return (
     <div className="controller-wrapper">
       <div className="session-wrapper">
@@ -11,13 +16,13 @@ const TimerController = ({ sessionLength, breakLength, dispatch, isRunning }) =>
         <Button
           value="-"
           imageSrc={minusIcon}
-          onClick={() => dispatch({ type: "decremented_session" })} 
+          onClick={() => dispatch({ type: "decremented_session" })}
           disabled={isRunning}
         />
         <Button
           value="+"
           imageSrc={plusIcon}
-          onClick={() => dispatch({ type: "incremented_session" })} 
+          onClick={() => dispatch({ type: "incremented_session" })}
           disabled={isRunning}
         />
       </div>

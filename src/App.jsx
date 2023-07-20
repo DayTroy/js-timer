@@ -1,5 +1,5 @@
 import "./App.css";
-import {useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer } from "react";
 import Button from "./components/Button";
 import TimerController from "./components/TimerController";
 import TimerDisplay from "./components/TimerDisplay";
@@ -56,7 +56,6 @@ const App = () => {
   }, [isRunning]);
 
   useEffect(() => {
-    // Update timeLeft whenever sessionLength changes
     setTimeLeft(state.sessionLength * 60);
   }, [state.sessionLength]);
 
@@ -66,6 +65,15 @@ const App = () => {
 
   const handleStop = () => {
     setIsRunning(false);
+  };
+
+  const handleReset = () => {
+    setTimeLeft(state.sessionLength * 60);
+    setIsRunning(false);
+    dispatch({
+      type: "reset",
+      payload: { defaultSession: 25, defaultBreak: 5 },
+    });
   };
 
   return (
@@ -79,16 +87,14 @@ const App = () => {
         isRunning={isRunning}
       />
       <div className="timer-buttons">
-        <Button value={isRunning ? "Stop" : "Start"} onClick={isRunning ? handleStop : handleStart}/>
+        <Button
+          value={isRunning ? "Stop" : "Start"}
+          onClick={isRunning ? handleStop : handleStart}
+        />
         <Button
           value="Reset"
           sessionLength={state.sessionLength}
-          onClick={() =>
-            dispatch({
-              type: "reset",
-              payload: { defaultSession: 25, defaultBreak: 5 },
-            })
-          }
+          onClick={handleReset}
         />
       </div>
     </div>
