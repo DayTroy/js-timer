@@ -7,9 +7,14 @@ const Button = ({ value, onClick }) => {
     setTimeout(() => {
       ref.current.style.boxShadow = "4px 4px 0 0 #000";
     }, 100);
+    if (value == "Reset") {
+      onClick();
+      return;
+    }
+    onClick();
   };
   return (
-    <button ref={ref} onClick={onClick} className="custom-button">
+    <button ref={ref} onClick={handleClick} className="custom-button">
       {value}
     </button>
   );
