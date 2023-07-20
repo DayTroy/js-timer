@@ -1,5 +1,5 @@
 import "./App.css";
-import { useReducer } from "react";
+import {useState, useEffect, useReducer } from "react";
 import Button from "./components/Button";
 import TimerController from "./components/TimerController";
 import TimerDisplay from "./components/TimerDisplay";
@@ -10,6 +10,7 @@ const ACTIONS = {
   DECREMENTED_SESSION: "decremented_session",
   DECREMENTED_BREAK: "decremented_break",
   RESET: "reset",
+  START: "start",
 };
 
 const reducer = (state, action) => {
@@ -39,17 +40,46 @@ const App = () => {
     breakLength: 5,
   });
 
+  const [timeLeft, setTimeLeft] = useState(state.sessionLength * 60);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (isRunning) {
+      const timer = setInterval(() => {
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [isRunning]);
+
+  useEffect(() => {
+    // Update timeLeft whenever sessionLength changes
+    setTimeLeft(state.sessionLength * 60);
+  }, [state.sessionLength]);
+
+  const handleStart = () => {
+    setIsRunning(true);
+  };
+
+  const handleStop = () => {
+    setIsRunning(false);
+  };
+
   return (
     <div className="timer-wrapper">
       <h1>25 + 5 Clock</h1>
-      <TimerDisplay sessionLength={state.sessionLength} />
+      <TimerDisplay sessionLength={timeLeft} />
       <TimerController
         sessionLength={state.sessionLength}
         breakLength={state.breakLength}
         dispatch={dispatch}
+        isRunning={isRunning}
       />
       <div className="timer-buttons">
-        <Button value="Start" />
+        <Button value={isRunning ? "Stop" : "Start"} onClick={isRunning ? handleStop : handleStart}/>
         <Button
           value="Reset"
           sessionLength={state.sessionLength}
