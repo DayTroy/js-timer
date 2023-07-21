@@ -3,6 +3,7 @@ import { useState, useEffect, useReducer } from "react";
 import Button from "./components/Button";
 import TimerController from "./components/TimerController";
 import TimerDisplay from "./components/TimerDisplay";
+import transitionSound from "./assets/audio/timer-sound.mp3";
 
 const ACTIONS = {
   INCREMENTED_SESSION: "incremented_session",
@@ -42,28 +43,54 @@ const App = () => {
 
   const [timeLeft, setTimeLeft] = useState(state.sessionLength * 60);
   const [isRunning, setIsRunning] = useState(false);
-  const [isBreakTime, setIsBreakTime] = useState(false); // New state to track break time
+  const [isBreakTime, setIsBreakTime] = useState(false);
+  const [playTransitionSound, setPlayTransitionSound] = useState(false);
+  const [isInTransition, setIsInTransition] = useState(false);
 
   useEffect(() => {
     let timer;
-    if (isRunning && timeLeft > 0) {
+  
+    if (isRunning && timeLeft > 0 && !isInTransition) {
       timer = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 1000);
-    } else if (timeLeft === 0) {
+      }, 100);
+    } else if (timeLeft === 0 && !isInTransition) {
       if (!isBreakTime && state.breakLength > 0) {
         setIsBreakTime(true);
         setTimeLeft(state.breakLength * 60);
+        setIsInTransition(true);
+        setPlayTransitionSound(true);
       } else {
         setIsBreakTime(false);
         setTimeLeft(state.sessionLength * 60);
+        setIsInTransition(true);
+        setPlayTransitionSound(true);
       }
     }
-
+  
+    if (playTransitionSound) {
+      const audio = new Audio(transitionSound);
+      audio.play();
+      setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        setPlayTransitionSound(false);
+        setIsInTransition(false);
+      }, 3000);
+    }
+  
     return () => {
       clearInterval(timer);
     };
-  }, [isRunning, timeLeft, state.sessionLength, state.breakLength, isBreakTime]);
+  }, [
+    isRunning,
+    timeLeft,
+    state.sessionLength,
+    state.breakLength,
+    isBreakTime,
+    playTransitionSound,
+    isInTransition,
+  ]);
 
   useEffect(() => {
     setTimeLeft(state.sessionLength * 60);
@@ -90,7 +117,7 @@ const App = () => {
   return (
     <div className="timer-wrapper">
       <h1>25 + 5 Clock</h1>
-      <TimerDisplay sessionLength={timeLeft} isBreakTime={isBreakTime}/>
+      <TimerDisplay sessionLength={timeLeft} isBreakTime={isBreakTime} />
       <TimerController
         sessionLength={state.sessionLength}
         breakLength={state.breakLength}
