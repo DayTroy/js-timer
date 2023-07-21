@@ -49,7 +49,7 @@ const App = () => {
 
   useEffect(() => {
     let timer;
-  
+
     if (isRunning && timeLeft > 0 && !isInTransition) {
       timer = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
@@ -67,7 +67,7 @@ const App = () => {
         setPlayTransitionSound(true);
       }
     }
-  
+
     if (playTransitionSound) {
       const audio = new Audio(transitionSound);
       audio.play();
@@ -78,7 +78,6 @@ const App = () => {
         setIsInTransition(false);
       }, 3000);
     }
-  
     return () => {
       clearInterval(timer);
     };
@@ -117,7 +116,7 @@ const App = () => {
   return (
     <div className="timer-wrapper">
       <h1>25 + 5 Clock</h1>
-      <TimerDisplay sessionLength={timeLeft} isBreakTime={isBreakTime} />
+      <TimerDisplay timeLeft={timeLeft} isBreakTime={isBreakTime} />
       <TimerController
         sessionLength={state.sessionLength}
         breakLength={state.breakLength}

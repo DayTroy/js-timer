@@ -11,7 +11,7 @@ const TimerController = ({
   return (
     <div className="controller-wrapper">
       <div className="session-wrapper">
-        <p>Session length</p>
+        <p style={{ fontWeight: "900" }}>Session length</p>
         <p>{sessionLength} min</p>
         <Button
           value="-"
@@ -27,7 +27,7 @@ const TimerController = ({
         />
       </div>
       <div className="break-wrapper">
-        <p>Break length</p>
+        <p style={{ fontWeight: "900" }}>Break length</p>
         <p>{breakLength} min</p>
         <Button
           value="-"
