@@ -12,7 +12,7 @@ const TimerDisplay = ({ sessionLength, isBreakTime }) => {
       <div className="outer">
         <div className="inner">
         <span id="time-label">
-            {isBreakTime ? "Break" : "Session"}:
+            {isBreakTime ? "Break" : "Session"}
           </span>
           <span id="time-left">{formatTime(sessionLength)}</span>
         </div>

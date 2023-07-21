@@ -45,26 +45,24 @@ const App = () => {
   const [isBreakTime, setIsBreakTime] = useState(false); // New state to track break time
 
   useEffect(() => {
+    let timer;
     if (isRunning && timeLeft > 0) {
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
       }, 1000);
-
-      return () => {
-        clearInterval(timer);
-      };
     } else if (timeLeft === 0) {
       if (!isBreakTime && state.breakLength > 0) {
-        // Switch to break time if breakLength is greater than 0
         setIsBreakTime(true);
         setTimeLeft(state.breakLength * 60);
       } else {
-        // Reset to session time if break time is 0 or break time is over
         setIsBreakTime(false);
         setTimeLeft(state.sessionLength * 60);
-        setIsRunning(false); // Stop the timer
       }
     }
+
+    return () => {
+      clearInterval(timer);
+    };
   }, [isRunning, timeLeft, state.sessionLength, state.breakLength, isBreakTime]);
 
   useEffect(() => {
