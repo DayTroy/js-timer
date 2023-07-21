@@ -1,4 +1,4 @@
-const TimerDisplay = ({ sessionLength }) => {
+const TimerDisplay = ({ sessionLength, isBreakTime }) => {
   const formatTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
@@ -11,7 +11,9 @@ const TimerDisplay = ({ sessionLength }) => {
     <div className="timer-display">
       <div className="outer">
         <div className="inner">
-          <span id="time-label">Time left:</span>
+        <span id="time-label">
+            {isBreakTime ? "Break" : "Session"}:
+          </span>
           <span id="time-left">{formatTime(sessionLength)}</span>
         </div>
       </div>
