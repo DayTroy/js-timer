@@ -44,20 +44,10 @@ body {
   stroke: none;
 }
 
-.base-timer__path-elapsed {
-  stroke-width: 7px;
-  stroke: grey;
-}
-
-.base-timer__circle {
-  fill: none;
-  stroke: none;
-}
-
 /* The SVG path that displays the timer's progress */
 .base-timer__path-elapsed {
   stroke-width: 7px;
-  stroke: grey;
+  stroke: #31393C;
 }
 
 .base-timer-label {

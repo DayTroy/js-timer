@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import clickSound from "../assets/audio/regulate-sound.mp3";
 
 const Button = ({ value, onClick, disabled, imageSrc }) => {
   const ref = useRef(null);
@@ -7,15 +8,15 @@ const Button = ({ value, onClick, disabled, imageSrc }) => {
     setTimeout(() => {
       ref.current.style.boxShadow = "4px 4px 0 0 #000";
     }, 100);
-    if (value == "Reset") {
-      onClick();
-      return;
+
+    new Audio(clickSound).play();
+    switch (value) {
+      case "Start" || "Reset":
+        onClick();
+        break;
+      default:
+        onClick();
     }
-    if (value == "Start") {
-      onClick();
-      return;
-    }
-    onClick();
   };
   return (
     <button

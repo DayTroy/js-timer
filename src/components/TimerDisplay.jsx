@@ -1,7 +1,7 @@
 import React from "react";
 import formatTime from "../utils/formatTime";
 
-const TimerDisplay = ({ timeLeft, isBreakTime }) => {
+const TimerDisplay = ({ timeLeft, isBreakTime, circleDasharray }) => {
   return (
     <div className="base-timer">
       <svg
@@ -13,7 +13,7 @@ const TimerDisplay = ({ timeLeft, isBreakTime }) => {
           <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45" />
           <path
             id="base-timer-path-remaining"
-            strokeDasharray="283"
+            strokeDasharray={circleDasharray}
             className="base-timer__path-remaining ${remainingPathColor}"
             d="
           M 50, 50
