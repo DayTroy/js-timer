@@ -15,17 +15,21 @@
 }
 
 body {
-  background-color: #ffffff;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(255, 255, 255, 1) 50%
+  );
 }
 
 .timer-wrapper {
   width: 20rem;
-  margin: 0 auto;
-  border: 0.3rem solid #000;
+  margin: 0 auto;  
   padding: 2rem;
   background-color: #fff;
   border-radius: 1rem;
-  box-shadow: 4px 4px 0 0 #000;
+  box-shadow: 8px 8px 0 0 #000;
+  border-top: 0.3rem solid #000;
 }
 
 .base-timer {
@@ -116,7 +120,7 @@ body {
   justify-content: space-around;
   margin-top: 2rem;
   border-radius: 0.5rem;
-  border: 0.1rem solid #000;
+  border: 0.3rem dashed #000;
   padding: 1rem 0 1rem;
 }
 
@@ -129,9 +133,9 @@ body {
   border: 0.1rem solid #000;
   border-radius: 0.5rem;
   color: #fff;
-  transition: box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
   cursor: pointer;
   outline: none;
+  transition: 0.2s ease-in-out;
 }
 
 .custom-button:hover {
@@ -160,30 +164,30 @@ body {
   width: 5rem;
 }
 
-
 @media only screen and (max-width: 370px) {
   .timer-wrapper {
     width: 17rem;
   }
-  .base-timer{
+  .base-timer {
     height: 12rem;
     width: 12rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
-  .time__left{
+  .time__left {
     font-size: 2rem;
   }
-  .time__type{
+  .time__type {
     font-size: 2rem;
   }
-  .base-timer-label{
+  .base-timer-label {
     transform: translate(-17%, -23%);
   }
-  .custom-button:nth-child(3), .custom-button:nth-child(4){
+  .custom-button:nth-child(3),
+  .custom-button:nth-child(4) {
     width: 2rem;
     height: 2rem;
   }
-  .controller-wrapper{    
+  .controller-wrapper {
     width: 13rem;
   }
 }

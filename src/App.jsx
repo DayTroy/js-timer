@@ -4,36 +4,7 @@ import Button from "./components/Button";
 import TimerController from "./components/TimerController";
 import TimerDisplay from "./components/TimerDisplay";
 import transitionSound from "./assets/audio/timer-sound.mp3";
-
-const ACTIONS = {
-  INCREMENTED_SESSION: "incremented_session",
-  INCREMENTED_BREAK: "incremented_break",
-  DECREMENTED_SESSION: "decremented_session",
-  DECREMENTED_BREAK: "decremented_break",
-  RESET: "reset",
-  START: "start",
-};
-
-const reducer = (state, action) => {
-  if (action.type === ACTIONS.INCREMENTED_SESSION && state.sessionLength < 60) {
-    return { ...state, sessionLength: state.sessionLength + 1 };
-  }
-  if (action.type === ACTIONS.INCREMENTED_BREAK && state.breakLength < 60) {
-    return { ...state, breakLength: state.breakLength + 1 };
-  }
-  if (action.type === ACTIONS.DECREMENTED_SESSION && state.sessionLength > 1) {
-    return { ...state, sessionLength: state.sessionLength - 1 };
-  }
-  if (action.type === ACTIONS.DECREMENTED_BREAK && state.breakLength > 1) {
-    return { ...state, breakLength: state.breakLength - 1 };
-  }
-  if (action.type === ACTIONS.RESET) {
-    return {
-      sessionLength: action.payload.defaultSession,
-      breakLength: action.payload.defaultBreak,
-    };
-  } else return state;
-};
+import reducer from "./utils/timerReducer";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -49,11 +20,10 @@ const App = () => {
 
   useEffect(() => {
     let timer;
-
     if (isRunning && timeLeft > 0 && !isInTransition) {
       timer = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 100);
+      }, 1000);
     } else if (timeLeft === 0 && !isInTransition) {
       if (!isBreakTime && state.breakLength > 0) {
         setIsBreakTime(true);

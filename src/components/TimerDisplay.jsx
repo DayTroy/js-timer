@@ -1,13 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
+import formatTime from "../utils/formatTime";
 
 const TimerDisplay = ({ timeLeft, isBreakTime }) => {
-  const formatTime = (totalSeconds) => {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
   return (
     <div className="base-timer">
       <svg
