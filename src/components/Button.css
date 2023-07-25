@@ -20,11 +20,11 @@
   margin-left: 0.7rem;
 }
 
-.disabled-button {
+/* .disabled-button {
   transition: 0.2s ease-in-out;
   background-color: #f13f3f;
   border: 0.1rem solid #000;
-}
+} */
 
 .custom-button:nth-child(1),
 .custom-button:nth-child(2) {

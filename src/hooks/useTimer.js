@@ -21,7 +21,7 @@ const useTimer = (defaultSession, defaultBreak) => {
     if (isRunning && timeLeft > 0 && !isInTransition) {
       timer = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 100);
+      }, 1000);
     } else if (timeLeft === 0 && !isInTransition) {
       if (!isBreakTime && state.breakLength > 0) {
         setIsBreakTime(true);

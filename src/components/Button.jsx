@@ -19,12 +19,24 @@ const Button = ({ value, onClick, disabled, imageSrc }) => {
         onClick();
     }
   };
+
+  const disabledButtonStyle = {
+    transition: "0.2s ease-in-out",
+    backgroundColor: "#8F8F8F",
+    border: "0.1rem solid #000",
+  };
+
+  const buttonStyle = {
+    backgroundColor: value === "Stop" ? "#f13f3f" : "black",
+  };
+
   return (
     <button
       ref={ref}
       onClick={handleClick}
       className={`custom-button ${disabled ? "disabled-button" : ""}`}
       disabled={disabled}
+      style={disabled ? disabledButtonStyle : buttonStyle}
     >
       {imageSrc ? <img src={imageSrc} alt={value} /> : value}
     </button>
