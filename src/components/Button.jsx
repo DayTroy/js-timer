@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import clickSound from "../assets/audio/regulate-sound.mp3";
+import "./Button.css";
 
 const Button = ({ value, onClick, disabled, imageSrc }) => {
   const ref = useRef(null);

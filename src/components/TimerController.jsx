@@ -1,6 +1,7 @@
 import Button from "./Button";
 import plusIcon from "../assets/icons/plus.svg";
 import minusIcon from "../assets/icons/minus.svg";
+import "./TimerController.css";
 
 const TimerController = ({
   sessionLength,

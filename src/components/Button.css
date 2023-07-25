@@ -1,0 +1,41 @@
+.custom-button {
+  width: 2.5rem;
+  padding-top: 0.1rem;
+  margin-top: 1rem;
+  box-shadow: 4px 4px 0 0 #000;
+  background-color: #000;
+  border: 0.1rem solid #31393c;
+  border-radius: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s ease-in-out;
+}
+
+.custom-button:hover {
+  opacity: 0.9;
+}
+
+.custom-button:nth-child(4) {
+  margin-left: 0.7rem;
+}
+
+.disabled-button {
+  transition: 0.2s ease-in-out;
+  background-color: #f13f3f;
+  border: 0.1rem solid #000;
+}
+
+.custom-button:nth-child(1),
+.custom-button:nth-child(2) {
+  font-size: 1.7rem;
+  width: 5rem;
+}
+
+@media only screen and (max-width: 390px) {
+  .custom-button:nth-child(3),
+  .custom-button:nth-child(4) {
+    width: 2rem;
+    height: 2rem;
+  }
+}

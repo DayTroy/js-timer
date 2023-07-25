@@ -1,5 +1,6 @@
 import React from "react";
 import formatTime from "../utils/formatTime";
+import "./TimerDisplay.css";
 
 const TimerDisplay = ({ timeLeft, isBreakTime, circleDasharray }) => {
   return (
